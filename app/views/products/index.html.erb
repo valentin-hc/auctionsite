@@ -1,0 +1,10 @@
+<h2>List of products</h2>
+<%= @user.name %>
+<%= link_to "Add a new product", new_user_product_path(@user) %>
+<% @products.each do |product| %>
+	<li> 
+		<%= product.title %> 
+		<%= link_to "Product details", user_product_path(@user, product) %>
+		<%= link_to "Delete", product_path(product), method: :delete, data: {confirm: "Are you sure?"} %>
+	</li>
+<% end %>
