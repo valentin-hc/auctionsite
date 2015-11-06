@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105150059) do
+ActiveRecord::Schema.define(version: 20151106171808) do
+
+  create_table "bids", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.integer  "amount",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bids", ["product_id"], name: "index_bids_on_product_id"
+  add_index "bids", ["user_id"], name: "index_bids_on_user_id"
 
   create_table "products", force: true do |t|
     t.integer  "user_id"
@@ -21,15 +32,17 @@ ActiveRecord::Schema.define(version: 20151105150059) do
     t.datetime "time",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "minimum_bid"
   end
 
   add_index "products", ["user_id"], name: "index_products_on_user_id"
 
   create_table "users", force: true do |t|
-    t.string   "name",       null: false
-    t.string   "email",      null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",            null: false
+    t.string   "email",           null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
   end
 
 end

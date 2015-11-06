@@ -5,6 +5,6 @@
 	<li> 
 		<%= product.title %> 
 		<%= link_to "Product details", user_product_path(@user, product) %>
-		<%= link_to "Delete", product_path(product), method: :delete, data: {confirm: "Are you sure?"} %>
+		<%= link_to "Delete", user_product_path(@user, product), method: :delete, data: {confirm: "Are you sure?"} %>
 	</li>
 <% end %>

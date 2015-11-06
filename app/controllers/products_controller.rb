@@ -21,6 +21,8 @@ class ProductsController < ApplicationController
 		redirect_to user_products_path(user)
 	end
 	def show
+		@product = Product.find_by(id: params[:id])
+		@bid = Bid.new
 	end
 
 

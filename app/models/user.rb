@@ -3,4 +3,6 @@ class User < ActiveRecord::Base
 	validates :email, presence: true, uniqueness: true
 	validates :name, presence: true, uniqueness: true
 	has_many :products, dependent: :destroy 
+	has_many :bids, dependent: :destroy
+	has_secure_password
 end

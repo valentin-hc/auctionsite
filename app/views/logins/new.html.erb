@@ -1,0 +1,19 @@
+<h1>Please login</h1>
+
+<%= form_for @user, url: logins_path do |f| %> 
+	<div>
+		<%= f.label :email %>
+		<%= f.text_field :email, placeholder: "myemail.com" %>
+	</div>
+	<div>
+		<%= f.label :password %>
+		<%= f.password_field :password, placeholder: "My password" %>
+	</div>
+	<div>
+		<%= f.submit "Login" %>
+	</div>
+<% end %>
+
+<h1>Or</h1>
+<%= link_to "Browse products as a guest", users_path %>
+
