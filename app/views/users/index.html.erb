@@ -1,11 +1,9 @@
-<h1>List of users</h1>
-<%= display_current_user %><%= display_logout %>
-<% @users.each do |user| %>
-	<li>
-		<%= "#{user.name}, #{user.email}" %>
-		<%= link_to "User details", user_path(user) %>
-		<%= link_to "Delete", user_path(user), method: :delete, data: {confirm: "Are you sure?"} %>
-	</li>
-<% end %>
+<%= display_current_user %>
+<%= display_logout %>
+<h1>My area</h1>
+	<p>
+		<%= "#{@user.name}, #{@user.email}" %>
+		<%= link_to "My products", user_products_path(@user) %>
+		<%= link_to "Delete", user_path(@user), method: :delete, data: {confirm: "Are you sure?"} %>
+	</p>
 
-<%= link_to "Create new user", new_user_path %>

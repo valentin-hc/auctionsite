@@ -2,5 +2,5 @@ puts "________________Destroying all users and creating new dummy users_________
 User.destroy_all
 
 (1..5).each do |i|
-	User.create(name: "user#{i}", email: "user#{i}@supermail.com")
+	User.create(name: "user#{i}", email: "user#{i}@supermail.com", password: "bob")
 end

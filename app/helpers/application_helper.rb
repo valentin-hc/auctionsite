@@ -1,4 +1,17 @@
 module ApplicationHelper
+	def flash_message
+		if flash["notice"].present?
+			content_tag :p do 
+				flash["notice"]
+			end
+		elsif flash["errors"].present?
+			content_tag :ul do
+				flash["errors"].map do |error_message|
+					concat(content_tag(:li, error_message))
+				end
+			end
+		end
+	end
 
 	def current_user
 		return unless session[:current_user_id]
@@ -14,7 +27,7 @@ module ApplicationHelper
 	end
 	def display_logout
 		if current_user.present?
-			button_to "Delete session", destroy_session_path, :method => :delete
+			button_to "Logout", destroy_session_path, :method => :delete
 		end
 	end
 

@@ -2,11 +2,14 @@ class BidsController < ApplicationController
 	def create
 		current_user = User.find_by_id(session[:current_user_id])
 		product = Product.find_by(id: params[:product_id])
-		#if Bid.(params[:bid][:amount])
-		bid = product.bids.new(amount: params[:bid][:amount], user_id: current_user.id)
+		bid = product.bids.new(amount: params[:bid][:amount], user_id: current_user.id, minimum_bid: product.minimum_bid)
 		#binding.pry
 		if bid.save
-			redirect_to users_path
+			flash["notice"] = "Bid added !"
+			redirect_to product_path(product)
+		else
+			flash["errors"] = bid.errors.full_messages
+			redirect_to product_path(product)
 		end
 	end
 end

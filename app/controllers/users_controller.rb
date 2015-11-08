@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
+	skip_before_filter :require_login, :only => :create
 	def index
-		@users = User.all
+		@user = current_user
 		#binding.pry
 	end
 	def new
@@ -10,24 +11,19 @@ class UsersController < ApplicationController
 	def create
 		user = User.new(user_params)
 		if user.save
-			redirect_to users_path
+			flash["notice"] = "New account created !"
+			redirect_to root_path
 		else
-			redirect_to new_user_path
+			flash["errors"] = user.errors.full_messages
+			redirect_to root_path
 		end
 	end
 
-	def show
-		@user = User.find_by(id: params[:id])
-	end
 	def destroy
 		user = User.find_by(id: params[:id])
 		user.destroy
 		redirect_to users_path 
 	end
-
-
-
-
 
 
 	private

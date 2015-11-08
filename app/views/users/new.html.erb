@@ -1,4 +1,10 @@
+<%= display_current_user %>
+<%= display_logout %>
+
 <h1>Create a new user</h1>
+<%= flash_message %>
+
+
 <%= form_for @user do |f| %>
 	<div>
 		<%= f.label :name %>

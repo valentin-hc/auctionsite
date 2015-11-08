@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106171808) do
+ActiveRecord::Schema.define(version: 20151108110209) do
 
   create_table "bids", force: true do |t|
     t.integer  "user_id"
     t.integer  "product_id"
-    t.integer  "amount",     null: false
+    t.integer  "amount",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "minimum_bid"
   end
 
   add_index "bids", ["product_id"], name: "index_bids_on_product_id"

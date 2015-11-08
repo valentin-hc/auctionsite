@@ -1,23 +1,28 @@
 class ProductsController < ApplicationController
 	def index
-		@user = User.find_by(id: params[:user_id])
+		@user = current_user
 		@products = @user.products.all
 	end
 	def new
-		@user = User.find_by(id: params[:user_id])
+		@user = current_user
 		@product = Product.new
 	end
 	def create
-		user = User.find_by(id: params[:user_id])
+		user = current_user
 		product = user.products.new(product_params)
 		if product.save
+			flash["notice"] = "New product '#{product.title}' successfully added"
 			redirect_to user_products_path(user)
+		else
+			flash["errors"] = product.errors.full_messages
+			redirect_to new_user_product_path(user)
 		end
 	end
 	def destroy
 		product = Product.find_by(id: params[:id])
 		product.destroy
-		user = product.user_id
+		user = current_user
+		flash["notice"] = "Product deleted"
 		redirect_to user_products_path(user)
 	end
 	def show
@@ -29,6 +34,6 @@ class ProductsController < ApplicationController
 
 	private
 	def product_params
-		params.require(:product).permit(:title, :description, :date, :time)
+		params.require(:product).permit(:title, :description, :date, :time, :minimum_bid)
 	end
 end
